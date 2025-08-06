@@ -104,7 +104,7 @@ export function Layout() {
           let notificationOptions: NotificationOptions = {
             type: 'session_completed',
             title: `Session Completed (${data.session_id.slice(0, 8)})`,
-            body: `Completed: ${session.query}`,
+            body: `Completed: ${session.title || session.summary || session.query}`,
             metadata: {
               sessionId: data.session_id,
               model: session.model,
@@ -116,7 +116,7 @@ export function Layout() {
           if (nextStatus === SessionStatus.Failed) {
             notificationOptions.type = 'session_failed'
             notificationOptions.title = `Session Failed (${data.session_id.slice(0, 8)})`
-            notificationOptions.body = session.errorMessage || `Failed: ${session.query}`
+            notificationOptions.body = session.errorMessage || `Failed: ${session.title || session.summary || session.query}`
             notificationOptions.priority = 'high'
           }
 
